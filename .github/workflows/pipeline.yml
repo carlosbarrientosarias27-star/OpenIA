@@ -30,7 +30,8 @@ jobs:
         run: flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 
       - name: 5. Análisis de seguridad
-        run: bandit -r . [cite_start]-x ./tests
+        # Se usa -x para excluir la ruta de los tests y evitar falsos positivos de B101
+        run: bandit -r . -x ./tests
 
       - name: 6. Tests unitarios y Cobertura
         run: pytest --cov=calculadora
