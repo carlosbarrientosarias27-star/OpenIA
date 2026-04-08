@@ -1,6 +1,6 @@
 """Módulo para el cálculo de costes y proyecciones financieras de API."""
 from typing import Dict
-from precios import PRECIOS_MODELS, DEFAULT_MODEL
+from calculadora.precios import PRECIOS_MODELS, DEFAULT_MODEL
 
 class CalculadoraFinanciera:
     """Motor de cálculo de costes operativos para APIs de IA."""
