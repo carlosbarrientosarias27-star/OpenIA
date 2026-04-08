@@ -1,26 +1,30 @@
-"""Módulo para la gestión y conteo de tokens."""
+# calculadora/tokens.py
 import tiktoken
-import logging
 
-def estimar_tokens(texto: str, modelo: str) -> int:
-    """Calcula la cantidad de tokens de una cadena de texto.
+class EstimadorTokens:
+    """Encapsula la lógica de conteo de tokens para diferentes modelos."""
 
-    Args:
-        texto: El contenido a procesar.
-        modelo: El nombre del modelo para determinar el encoding.
+    def __init__(self, modelo: str):
+        """
+        Inicializa el estimador.
+        
+        Args:
+            modelo: Nombre del modelo para determinar el encoding.
+        """
+        try:
+            self.encoding = tiktoken.encoding_for_model(modelo)
+        except KeyError:
+            # Fallback a o200k_base si el modelo es muy reciente o desconocido por tiktoken
+            self.encoding = tiktoken.get_encoding("cl100k_base")
 
-    Returns:
-        int: Cantidad de tokens estimados.
-
-    Raises:
-        ValueError: Si el modelo no es reconocido por tiktoken.
-    """
-    try:
-        encoding = tiktoken.encoding_for_model(modelo)
-        return len(encoding.encode(texto))
-    except KeyError:
-        logging.warning(f"Modelo {modelo} no encontrado en tiktoken. Usando cl100k_base por defecto.")
-        encoding = tiktoken.get_encoding("cl100k_base")
-        return len(encoding.encode(texto))
-    except Exception as e:
-        raise ValueError(f"Error al procesar tokens: {e}")
+    def contar(self, texto: str) -> int:
+        """
+        Calcula el número exacto de tokens de un texto.
+        
+        Args:
+            texto: Cadena de texto a procesar.
+            
+        Returns:
+            Número entero de tokens.
+        """
+        return len(self.encoding.encode(texto))
