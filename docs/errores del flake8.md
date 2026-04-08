@@ -1,76 +1,59 @@
-# 📝 Reporte de Errores: Flake8
+# 📝 Reporte de Errores: Flake8 Audit
 
-## 1. Importaciones no utilizadas (F401)
+## 1. Espacios en blanco al final de la línea (W291)
+Archivos afectados:
 
-- Error: ./costesInicio.py:2:1: F401 'os' imported but unused
+calculadora/proyecciones.py (Líneas 17, 18, 19, 20)
 
-- Error: ./costesInicio.py:3:1: F401 'openai.OpenAI' imported but unused
+tests/test_precios.py(Línea 25)
 
-- Explicación: Has importado las librerías os y OpenAI, pero no las estás usando en ninguna parte del código. Esto ensucia el entorno y consume memoria innecesariamente.
+Descripción: Has dejado espacios vacíos (presionaste la barra espaciadora) justo antes de pulsar "Enter".
 
-- Solución: Borra las líneas import os y from openai import OpenAI.
+Por qué importa: Estos espacios son "invisibles" y pueden causar problemas en sistemas de control de versiones como Git, ensuciando los historiales de cambios.
 
-## 2. Espacios en blanco y líneas vacías (W293, E303, W291)
+Solución: Borra cualquier espacio que esté al final de esas líneas. El cursor debe terminar inmediatamente después del último carácter o símbolo.
 
-- Errores (W293): blank line contains whitespace. Tienes líneas que parecen vacías pero tienen espacios o tabulaciones.
+## 2. Marcadores de seno de la cuerda F ( F541)
 
-- Error (E303): too many blank lines (3). Has dejado 3 líneas en blanco seguidas; el estándar PEP 8 recomienda máximo 2 entre clases/funciones y 1 dentro de ellas.
+Archivo afectado: main.py (Línea 37)
 
-- Error (W291): trailing whitespace. Hay espacios al final de una línea de código antes del salto de línea.
+Descripción: Has declarado una cadena como f"texto", pero no hay ninguna variable dentro de llaves {}.
 
-- Solución: Limpia las líneas vacías para que sean realmente vacías y asegúrate de que no haya espacios "invisibles" al final de tus frases.
+Por qué importa: Usar el prefijo f consume recursos innecesarios (aunque mínimos) si no se va a realizar ninguna interpolación de variables.
 
-## 3. Longitud de línea excedida (E501)
+Solución:
 
-- Error: line too long (X > 79 characters)
+Opción A: Quita la f del principio si es solo texto plano: "Tu texto aquí".
 
-- Explicación: Python recomienda que las líneas no superen los 79 caracteres. Esto facilita la lectura de dos archivos en paralelo o en pantallas pequeñas.
+Opción B: Incluye la variable que falta entre llaves: f"El resultado es {variable}".
 
-- Solución: Divide las líneas largas. Por ejemplo:
+# 🛠️ Guía de corrección paso a paso
+Sigue estos pasos para que tu código pase el check de Flake8:
 
-Python
-# En lugar de:
-proyeccion = calc.proyectar_uso_mensual(llamadas_por_dia=100, tokens_input_por_llamada=200, tokens_output_por_llamada=300)
+Paso 1: Corregirmain.py
+Busca la línea 37. Probablemente se vea así:
 
-# Haz esto:
-proyeccion = calc.proyectar_uso_mensual(
-    llamadas_por_dia=100,
-    tokens_input_por_llamada=200,
-    tokens_output_por_llamada=300
-)
-## 4. Estructura y saltos de línea (E305, W292)
+Pitón
+print(f"Calculando costes...") # Error F541 (falta variable)
+Cambial a:
 
-- Error (E305): expected 2 blank lines after class or function definition. Falta una línea en blanco extra antes de empezar el código principal tras definir la clase.
+Pitón
+print("Calculando costes...") # Eliminamos la 'f' innecesaria
+Paso 2: Limpiar calculadora/proyecciones.py y tests/test_precios.py
+Para eliminar los espacios finales (W291), puedes hacerlo manualmente o usar un comando si estás en Linux/Mac:
 
-- Error (W292): no newline at end of file. Todos los archivos de Python deben terminar con una línea vacía final.
+Intento
+# Elimina espacios al final de las líneas en todo el proyecto
+sed -i 's/[[:space:]]*$//' calculadora/proyecciones.py tests/test_precios.py
+Si usas VS Code, puedes activar la opción "files.trimTrailingWhitespace": true en tu configuración para que esto no vuelva a ocurrir.
 
-- Solución: Pulsa "Enter" al final de la última línea de tus archivos precios.py y costesInicio.py.
+Paso 3: Verificar la longitud de línea
+Has ejecutado Flake8 con --max-line-length=100. Asegúrate de que las nuevas líneas que escribas no superen este límite para evitar el error E501. 
 
-# 🛠️ Paso a paso para corregir el código
+# 📊 Tabla resumen para tu documentación
 
-Sigue este orden para limpiar tu proyecto:
-
-## Paso 1: Limpieza de Importaciones
-Abre costesInicio.py y elimina:
-
-Python
-import os
-from openai import OpenAI
-
-Paso 2: Ajuste de la Clase y Espaciado
-
-Asegúrate de que entre la definición de la clase y el primer método solo haya una línea. Borra los espacios en las líneas que están "vacías". Al terminar la clase CalculadoraCostes, deja dos líneas en blanco antes de calc = CalculadoraCostes(...).
-
-## Paso 3: Acortar los print y llamadas
-
-En los ejemplos del final (Ejemplo 4 especialmente), los print con muchas variables están superando los 100 caracteres. Usa paréntesis para romper las líneas:
-
-Python
-print(
-    f"Tokens input: {conversacion['tokens_input']} "
-    f"→ ${conversacion['coste_input_usd']:.6f}"
-)
-
-## Paso 4: El toque final
-
-Ve al final de precios.py y costesInicio.py, coloca el cursor después del último carácter y presiona Enter una vez. Guarda los archivos.
+| Archivo | Error | Tipo | Gravedad | Solución |
+| :--- | :--- | :--- | :--- | :--- |
+| `calculadora/proyecciones.py` | `W291` | Estilo | Baja | Eliminar espacios invisibles (trailing whitespace) al final de las líneas 17 a 20. |
+| `main.py` | `F541` | Sintaxis | Media | Quitar el prefijo `f` de la cadena en la línea 37, ya que no contiene variables entre llaves `{}`. |
+| `tests/test_precios.py` | `W291` | Estilo | Baja | Eliminar el espacio en blanco al final de la línea 25. |
