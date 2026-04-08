@@ -1,9 +1,4 @@
 # 🧮 OPENIA — Calculadora de Precios, Tokens y Proyecciones
-
-![CI Pipeline](https://github.com/tu-usuario/openia/actions/workflows/ci.yml/badge.svg)
-![Python](https://img.shields.io/badge/python-3.10%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-
 Librería Python para calcular **costes de uso de APIs de IA**, gestionar **tokens**, estimar **precios** por modelo y generar **proyecciones económicas** de consumo. Diseñada para ser modular, testeable y fácilmente integrable en cualquier proyecto que consuma modelos de lenguaje.
 
 ---
@@ -228,5 +223,3 @@ jobs:
 Este proyecto está licenciado bajo los términos de la licencia **MIT**. Consulta el archivo [LICENSE](LICENSE MIT) para más información.
 
 ---
-
-> Documentación técnica extendida disponible en la carpeta [`docs/`](docs/).
