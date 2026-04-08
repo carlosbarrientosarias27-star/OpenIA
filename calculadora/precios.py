@@ -18,14 +18,6 @@ class GestorPrecios:
     }
 
     def __init__(self, modelo: str):
-        """
-        Inicializa el gestor con un modelo específico.
-        
-        Args:
-            modelo: Nombre del modelo de IA.
-        Raises:
-            ModelNotFoundError: Si el modelo no existe en el diccionario de precios.
-        """
         if modelo not in self.PRECIOS:
             raise ModelNotFoundError(f"El modelo '{modelo}' no está soportado.")
         
@@ -35,14 +27,12 @@ class GestorPrecios:
     def calcular_coste_llamada(self, tokens_input: int, tokens_output: int) -> Dict[str, float]:
         """
         Calcula el desglose de costes para una cantidad de tokens.
-        
-        Args:
-            tokens_input: Cantidad de tokens de entrada.
-            tokens_output: Cantidad de tokens de salida.
-            
-        Returns:
-            Diccionario con costes en USD y céntimos.
         """
+        # --- 1. Validation Logic ---
+        if tokens_input < 0 or tokens_output < 0:
+            raise ValueError("Los tokens no pueden ser negativos")
+
+        # --- 2. Calculation Logic ---
         coste_input = (tokens_input / 1_000_000) * self.tarifas["input"]
         coste_output = (tokens_output / 1_000_000) * self.tarifas["output"]
         total = coste_input + coste_output
