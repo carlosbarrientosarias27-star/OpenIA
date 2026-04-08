@@ -28,3 +28,10 @@ class EstimadorTokens:
             Número entero de tokens.
         """
         return len(self.encoding.encode(texto))
+
+if __name__ == "__main__":
+    # Este bloque solo se ejecuta si corres este archivo directamente
+    estimador = EstimadorTokens("gpt-4")
+    texto_ejemplo = "Hola, ¿cuántos tokens tiene esta frase?"
+    n_tokens = estimador.contar(texto_ejemplo)
+    print(f"El texto tiene {n_tokens} tokens.")
