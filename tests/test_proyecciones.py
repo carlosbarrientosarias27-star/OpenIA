@@ -1,11 +1,14 @@
 import pytest
-from unittest.mock import MagicMock
 from calculadora.proyecciones import ProyectorUso
 
+# Ya no necesitas el import de unittest.mock
+# El fixture 'mocker' de pytest-mock se encarga de crear los objetos
+
 @pytest.fixture
-def mock_gestor():
-    """Fixture que proporciona un mock del GestorPrecios."""
-    return MagicMock()
+def mock_gestor(mocker):
+    """Fixture que proporciona un mock del GestorPrecios usando pytest-mock."""
+    # Creamos un objeto mock genérico
+    return mocker.Mock()
 
 def test_proyeccion_mensual_calculo_correcto(mock_gestor):
     """
