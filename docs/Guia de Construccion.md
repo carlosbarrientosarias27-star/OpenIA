@@ -73,19 +73,19 @@ Si todos los tests pasan, el entorno está correctamente configurado.
 
 ```
 .
-├── src/
-│   ├── core/
-│   ├── tokens/
-│   ├── precios/
-│   ├── modelos/
-│   └── utils/
+├── calculadora/
+│    ├── tokens/
+│    ├── precios/
+│    ├── proyecciones/
+│  
 ├── tests/
-│   ├── unit/
-│   ├── integration/
-│   └── fixtures/
+│   ├── precios/
+│   ├── proyecciones/
+│   └── tokens/
 ├── docs/
-├── .env.example
-├── pyproject.toml
+├── InterfazCostes
+├── InterfazEmpresa
+├── main.py
 └── README.md
 ```
 
