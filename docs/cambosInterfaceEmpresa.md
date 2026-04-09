@@ -21,3 +21,11 @@ La solución: Debemos reducir el height y aumentar el corner_radius para que las
 Tu error: La fuente 16 es muy grande para un formulario profesional.
 
 La solución: Bajar a 13 o 14 puntos y ajustar el color del botón de la flecha.
+
+Modifica la parte final de tu función para usar saltos de línea (\n) e iconos. He ajustado también los decimales de los costes para que se vean más limpios.
+
+2. Ajustar los Labels en el __init__
+Para que el texto no se vea "amontonado" y esté bien alineado a la izquierda dentro del cuadro blanco, añade anchor="w" y justify="left" cuando crees los labels de resultados:
+
+1. Función ejecutar_calculo actualizada
+He añadido una tasa de cambio (puedes ajustarla, yo usé 0.92 para el Euro) y el cálculo de céntimos:
