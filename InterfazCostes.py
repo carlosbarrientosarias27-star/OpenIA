@@ -12,7 +12,7 @@ class CalculadoraCostesApp(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        self.title("Calculadora de Costes de APIs de Ia")
+        self.title("Calculadora de Costes Multi-Modelo")
         self.geometry("750x850") 
         self.configure(fg_color="#f0f2f5")
 
@@ -36,9 +36,22 @@ class CalculadoraCostesApp(ctk.CTk):
         self.frame_params = ctk.CTkFrame(self, fg_color="transparent")
         self.frame_params.pack(pady=10, padx=40, fill="x")
 
-       
+        # Tokens de salida estimados
+        self.label_out = ctk.CTkLabel(self.frame_params, text="Tokens Salida (Est.):", font=("Inter", 12))
+        self.label_out.grid(row=0, column=0, padx=(0, 10))
+        self.entry_output = ctk.CTkEntry(self.frame_params, width=100)
+        self.entry_output.insert(0, "200")
+        self.entry_output.grid(row=0, column=1)
+
+        # Llamadas diarias para la proyección
+        self.label_calls = ctk.CTkLabel(self.frame_params, text="Consultas/Día:", font=("Inter", 12))
+        self.label_calls.grid(row=0, column=2, padx=(20, 10))
+        self.entry_calls = ctk.CTkEntry(self.frame_params, width=100)
+        self.entry_calls.insert(0, "100")
+        self.entry_calls.grid(row=0, column=3)
+
         # --- SECCIÓN: Texto a analizar ---
-        self.label_texto = ctk.CTkLabel(self, text="texto a analizar", font=("Comic Sans MS", 16, "bold"))
+        self.label_texto = ctk.CTkLabel(self, text="Prompt / Input de Texto", font=("Inter", 16, "bold"))
         self.label_texto.pack(pady=(10, 5), padx=40, anchor="w")
         
         self.input_texto = ctk.CTkTextbox(self, height=150, width=620, border_width=1)
