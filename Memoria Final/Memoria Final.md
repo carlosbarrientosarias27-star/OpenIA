@@ -119,21 +119,39 @@ print(f"Documentos procesados: {proyeccion_docs['llamadas_mensuales']}")
 Tras la refactorización, el código de `costesInicio.py` queda integrado en la estructura del proyecto `OPENIA` de la siguiente manera:
 
 ```
-OPENIA/
-├── calculadora/
+openia/
+│
+├── calculadora/              # Paquete principal
 │   ├── __init__.py
-│   ├── precios.py          ← Diccionario PRECIOS extraído como constante
-│   ├── proyecciones.py     ← Lógica de proyección mensual
-│   └── tokens.py           ← Lógica de estimación de tokens
-├── CódigoInicio/
-│   └── costesInicio.py     ← Archivo original (ahora solo punto de entrada)
-├── tests/
+│   ├── precios.py            # Lógica de precios por modelo
+│   ├── tokens.py             # Conteo y estimación de tokens
+│   └── proyecciones.py       # Proyecciones de coste
+│
+├── docs/                     # Documentación técnica
+│   ├── Api referencia.md
+│   ├── arquitectura.md
+│   ├── Changelog.md
+│   ├── errores de seguridad.md
+│   ├── errores del flake8.md
+│   ├── Fallo test_precio.md
+│   └── Guia de Construccion.md
+│
+├── tests/                    # Suite de tests
+│   ├── __init__.py
 │   ├── test_precios.py
 │   ├── test_proyecciones.py
 │   └── test_tokens.py
-├── main.py
-└── InterfazCostes.py
-└── InterfazEmpresa.py
+│
+├── .github/                  # Configuración de GitHub Actions
+├── .vscode/                  # Configuración del editor
+├── main.py                   # Punto de entrada / ejemplos
+├── conftest.py               # Fixtures compartidos de pytest
+├── costesInicio.py           # Script de costes iniciales
+├── requirements.txt          # Dependencias del proyecto
+├── setup.cfg                 # Configuración del paquete y herramientas
+├── pytest.ini                # Configuración de pytest
+├── .gitignore
+└── LICENSE
 
 ```
 
