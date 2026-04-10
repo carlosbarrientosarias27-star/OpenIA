@@ -133,6 +133,8 @@ OPENIA/
 │   └── test_tokens.py
 ├── main.py
 └── InterfazCostes.py
+└── InterfazEmpresa.py
+
 ```
 
 La clase `CalculadoraCostes` ha sido dividida en módulos separados dentro de `calculadora/` para seguir el principio de responsabilidad única, lo que también facilita la cobertura de tests existente en `tests/`.
